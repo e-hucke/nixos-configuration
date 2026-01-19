@@ -10,4 +10,5 @@
     pulse.enable = true;
     wireplumber.enable = true;
   };
+  security.pam.services.hyprlock = {};
 }

@@ -1,6 +1,7 @@
 { ... }:
 
 {
+  services.wob.enable = true;
   services.mako =
   {
     enable = true;
@@ -19,4 +20,5 @@
       margin = 20;
     };
   };
+  services.hyprpolkitagent.enable = true;
 }

@@ -64,7 +64,6 @@ in
   
   environment.systemPackages = with pkgs; 
   [
-    hyprpolkitagent
     ntfs3g
     psmisc
     networkmanagerapplet
