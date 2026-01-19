@@ -1,0 +1,22 @@
+{ ... }:
+
+{
+  services.mako =
+  {
+    enable = true;
+    settings =
+    {
+      max-visible = 10;
+      layer = "top";
+      font = "Fira Sans Semibold 10";
+      background-color = "#4c566add";
+      text-color = "#d8dee9";
+      border-color = "#434c5e";
+      border-radius = 7;
+      max-icon-size = 48;
+      default-timeout = 10000;
+      anchor = "top-right";
+      margin = 20;
+    };
+  };
+}

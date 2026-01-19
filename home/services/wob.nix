@@ -1,0 +1,8 @@
+{ ... }:
+
+{
+  services.wob =
+  {
+    enable = true;
+  };
+}
