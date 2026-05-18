@@ -1,7 +1,11 @@
 { ... }:
 
 {
-  services.wob.enable = true;
+  services.wob =
+  {
+    enable = true;
+    settings."".timeout = 1000;
+  };
   services.mako =
   {
     enable = true;
