@@ -25,7 +25,7 @@ in
   fileSystems."/mnt/shared" = 
   {
     device = "/dev/nvme0n1p3";
-    fsType = "ntfs-3g";
+    fsType = "btrfs";
   };
 
 
@@ -68,6 +68,7 @@ in
     psmisc
     networkmanagerapplet
     rose-pine-cursor
+    pulseaudio
   ];
   
   fonts.packages = with pkgs; 
