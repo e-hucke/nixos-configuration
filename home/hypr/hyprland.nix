@@ -5,6 +5,7 @@
   {
     enable = true;
     package = null;
+    systemd.enable = false;
     
     settings.envd =
     [
