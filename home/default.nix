@@ -28,6 +28,7 @@
     gimp
     mpv
     jq
+    pamixer
   ];
 
   home.pointerCursor =

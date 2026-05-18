@@ -120,9 +120,9 @@
 
     bindel =
     [
-      '', XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | awk '{if($1>100) system("pactl set-sink-volume @DEFAULT_SINK@ 100%")}' && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | awk '{print $1}' | head -1 > $XDG_RUNTIME_DIR/wob.sock''
-      ", XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | awk '{print $1}' | head -1 > $XDG_RUNTIME_DIR/wob.sock"
-      ", XF86AudioMute, exec, amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > $XDG_RUNTIME_DIR/wob.sock"
+      '', XF86AudioRaiseVolume, exec, pamixer -i 5 && pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock''
+      '', XF86AudioLowerVolume, exec, pamixer -d 5 && pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock''
+      '', XF86AudioMute, exec, pamixer -t && { pamixer --get-mute | grep -q true && echo "0 muted" || pamixer --get-volume; } > $XDG_RUNTIME_DIR/wob.sock''
     ];
   };
 }
