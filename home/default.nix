@@ -23,22 +23,8 @@
     hypridle
     hyprlock
     filezilla
+    vscodium
   ];
-
-  programs.vesktop.enable = true;
-  programs.firefox.enable = true;
-  programs.lutris.enable = true;
-  programs.mangohud =
-  {
-    enable = true;
-    enableSessionWide = true;
-  };
-  programs.vscode =
-  {
-    enable = true;
-    package = pkgs.vscodium;
-  };
-
 
 
   home.stateVersion = "25.11";

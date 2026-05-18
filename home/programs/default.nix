@@ -20,9 +20,4 @@
     enable = true;
     enableSessionWide = true;
   };
-  programs.vscode =
-  {
-    enable = true;
-    package = pkgs.vscodium;
-  };
 }

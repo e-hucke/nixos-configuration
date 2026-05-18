@@ -8,14 +8,14 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     wireplumber.enable = true;
-    pulse =
-    {
-      enable = true;
-      extraConfig =
-      ''
-        load-module module-combine-sink
-      '';
-    };
+    pulse.enable = true;
+    extraConfig.pipewire-pulse.pulse.cmd =
+    [
+      {
+        cmd = "load-module";
+        args = "module-combine-sink";
+      }
+    ];
   };
   security.pam.services.hyprlock = {};
 }

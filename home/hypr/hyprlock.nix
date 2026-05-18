@@ -29,27 +29,28 @@
         vibrancy_darkness = 0.0;
       };
       label =
-      {
-        monitor = "";
-        text = ''cmd[update:1000] echo "$(date +"%I:%M %p")"'';
-        color = "rgba(212, 205, 209, 1.0)";
-        font_size = 72;
-        font_family = "Fira Sans";
-        position = "0, 150";
-        halign = "center";
-        valign = "center";
-      };
-      label =
-      {
-        monitor = "";
-        text = ''cmd[update:1000] echo "$(date +"%A, %d %B")"'';
-        color = "rgba(212, 205, 209, 1.0)";
-        font_size = 20;
-        font_family = "Fira Sans";
-        position = "0, 70";
-        halign = "center";
-        valign = "center";
-      };
+      [ 
+        {
+          monitor = "";
+          text = ''cmd[update:1000] echo "$(date +"%I:%M %p")"'';
+          color = "rgba(212, 205, 209, 1.0)";
+          font_size = 72;
+          font_family = "Fira Sans";
+          position = "0, 150";
+          halign = "center";
+          valign = "center";
+        }
+        {
+          monitor = "";
+          text = ''cmd[update:1000] echo "$(date +"%A, %d %B")"'';
+          color = "rgba(212, 205, 209, 1.0)";
+          font_size = 20;
+          font_family = "Fira Sans";
+          position = "0, 70";
+          halign = "center";
+          valign = "center";
+        }
+      ];
       input-field = 
       {
         monitor = "";
