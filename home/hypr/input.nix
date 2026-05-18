@@ -109,7 +109,7 @@
     bind =
     [
       "$mainMod, V, exec, cliphist list | fuzzel --dmenu --with-nth 2 | cliphist decode | wl-copy"
-      "$mainMod, SHIFT, F12, Open monitor configuration menu, exec, ~/.local/share/scripts/hypr-monitor-menu.sh"
+      "$mainMod SHIFT, F12, exec, ~/.local/share/scripts/hypr-monitor-menu.sh"
     ];
 
     bindm =
