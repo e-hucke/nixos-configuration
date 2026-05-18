@@ -3,14 +3,20 @@
 {
   programs.uwsm.enable = true;
 
-  programs.hyprland = 
+  programs.hyprland =
   {
     enable = true;
     xwayland.enable = true;
     withUWSM = true;
   };
 
-  programs.waybar.enable = true;
+  xdg.portal =
+  {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    configPackages = with pkgs; [ xdg-desktop-portal-hyprland xdg-desktop-portal-gtk ];
+  };
+
   programs.gamemode.enable = true;
   programs.thunar.enable = true;
 

@@ -10,6 +10,8 @@
     ./cliphist.nix
     ./wlogout.nix
     ./fastfetch.nix
+    ./vscode.nix
+    ./thunar.nix
   ];
 
   programs.vesktop.enable = true;

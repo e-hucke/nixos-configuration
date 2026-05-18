@@ -49,7 +49,7 @@
 
     render =
     {
-      direct_scanout = true;
+      direct_scanout = false;
     };
 
     dwindle =

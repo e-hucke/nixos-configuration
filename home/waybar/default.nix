@@ -44,7 +44,7 @@
       {
         format = "󰐥 ";
         tooltip = false;
-        on-click = "wlogout"
+        on-click = "wlogout";
       };
 
       clock =

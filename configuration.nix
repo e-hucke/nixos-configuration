@@ -73,11 +73,9 @@ in
   ];
  
 
-  environment.variables = 
+  environment.variables =
   {
     "SUDO_EDITOR" = "nvim";
-    "XCURSOR_THEME" = "BreezeX-RosePineDawn-Linux";
-    "XCURSOR_SIZE" = 24;
   };
 
 

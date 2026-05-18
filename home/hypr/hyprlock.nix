@@ -50,6 +50,16 @@
           halign = "center";
           valign = "center";
         }
+        {
+          monitor = "";
+          text = ''cmd[update:200] [ "$(cat /sys/class/leds/input*::capslock/brightness 2>/dev/null | head -1)" = "1" ] && echo "CAPS LOCK"'';
+          color = "rgba(138, 122, 173, 1.0)";
+          font_size = 14;
+          font_family = "Fira Sans Semibold";
+          position = "0, 0";
+          halign = "center";
+          valign = "center";
+        }
       ];
       input-field = 
       {

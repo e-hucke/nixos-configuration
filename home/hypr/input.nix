@@ -53,7 +53,7 @@
       "$mainMod, K, Toggles  current window group mode (ungroup all related), togglegroup,"
       "$mainMod, Tab, Switches to the next window in the group, changegroupactive, f"
       "$mainMod, L, Lock the screen, exec, hyprlock"
-
+      
       "$mainMod, mouse:272, Move the window towards a direction, movewindow"
       "$mainMod SHIFT, left, Move active window to the left, movewindow, l"
       "$mainMod SHIFT, right, Move active window to the right, movewindow, r"
@@ -109,7 +109,7 @@
     bind =
     [
       "$mainMod, V, exec, cliphist list | fuzzel --dmenu --with-nth 2 | cliphist decode | wl-copy"
-      # todo "$mainMod SHIFT, F12, exec, ~/scripts/tv-control.sh"
+      "$mainMod, SHIFT, F12, Open monitor configuration menu, exec, ~/.local/share/scripts/hypr-monitor-menu.sh"
     ];
 
     bindm =
@@ -120,9 +120,9 @@
 
     bindel =
     [
-      '', XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | awk '{if($1>100) system("pactl set-sink-volume @DEFAULT_SINK@ 100%")}' && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | awk '{print $1}' | head -1 > /tmp/$HYPRLAND_INSTANCE_SIGNATURE.wob''
-      ", XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | awk '{print $1}' | head -1 > /tmp/$HYPRLAND_INSTANCE_SIGNATURE.wob"
-      ", XF86AudioMute, exec, amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > /tmp/$HYPRLAND_INSTANCE_SIGNATURE.wob"
+      '', XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | awk '{if($1>100) system("pactl set-sink-volume @DEFAULT_SINK@ 100%")}' && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | awk '{print $1}' | head -1 > $XDG_RUNTIME_DIR/wob.sock''
+      ", XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | awk '{print $1}' | head -1 > $XDG_RUNTIME_DIR/wob.sock"
+      ", XF86AudioMute, exec, amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > $XDG_RUNTIME_DIR/wob.sock"
     ];
   };
 }
