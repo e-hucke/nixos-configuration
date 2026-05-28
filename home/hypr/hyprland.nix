@@ -6,6 +6,7 @@
     enable = true;
     package = null;
     systemd.enable = false;
+    configType = "lua";
   };
   imports =
   [

@@ -1,128 +1,114 @@
-{ ... }:
+{ lib, ... }:
+
+let
+  inherit (lib.generators) mkLuaInline;
+
+  mk    = key: dsp:       { _args = [ (mkLuaInline key) (mkLuaInline dsp) ]; };
+  mkOpt = key: dsp: opts: { _args = [ (mkLuaInline key) (mkLuaInline dsp) opts ]; };
+in
 
 {
   wayland.windowManager.hyprland.settings =
   {
-    cursor =
+    mainMod     = { _var = "SUPER"; };
+    filemanager = { _var = "thunar"; };
+    applauncher = { _var = "fuzzel"; };
+    terminal    = { _var = "kitty"; };
+    shot_region = { _var = "grim -g '$(slurp)' ~/Pictures/Screenshots/$(date +'%Y%m%d_%H%M%S').png"; };
+    shot_screen = { _var = "grim ~/Pictures/Screenshots/$(date +'%Y%m%d_%H%M%S').png"; };
+
+    config =
     {
-      no_hardware_cursors = 0;
-      use_cpu_buffer = 1;
+      cursor =
+      {
+        no_hardware_cursors = 0;
+        use_cpu_buffer = 1;
+      };
+
+      input =
+      {
+        follow_mouse = 2;
+        float_switch_override_focus = 2;
+        sensitivity = 0;
+        accel_profile = "flat";
+      };
+
+      misc =
+      {
+        middle_click_paste = false;
+      };
+
+      binds =
+      {
+        allow_workspace_cycles = 1;
+        workspace_back_and_forth = 1;
+        workspace_center_on = 1;
+        movefocus_cycles_fullscreen = true;
+        window_direction_monitor_fallback = true;
+      };
     };
-
-    input =
-    {
-      follow_mouse = 2;
-      float_switch_override_focus = 2;
-      sensitivity = 0;
-      accel_profile = "flat";
-    };
-
-    misc =
-    {
-      middle_click_paste = false;
-    };
-
-    binds =
-    {
-      allow_workspace_cycles = 1;
-      workspace_back_and_forth = 1;
-      workspace_center_on = 1;
-      movefocus_cycles_fullscreen = true;
-      window_direction_monitor_fallback = true;
-    };
-
-    "$mainMod" = "SUPER";
-    "$filemanager" = "thunar";
-    "$applauncher" = "fuzzel"; 
-    "$terminal" = "kitty";
-    "$shot-region" = "grim -g '$(slurp)' ~/Pictures/Screenshots/$(date +'%Y%m%d_%H%M%S').png";
-    "$shot-screen" = "grim ~/Pictures/Screenshots/$(date +'%Y%m%d_%H%M%S').png";
-
-    bindd =
-    [
-      "$mainMod, RETURN, Opens your preferred terminal emulator ($terminal), exec, $terminal"
-      "$mainMod, E, Opens your preferred filemanager ($filemanager), exec, $filemanager"
-      "$mainMod, Q, Closes (not kill) current window, killactive,"
-      "$mainMod SHIFT, M, Exits Hyprland by terminating the user sessions, exec, loginctl terminate-user ''"
-      "$mainMod, B, Switches current window between floating and tiling mode, togglefloating,"
-      "$mainMod, SPACE, Runs your application launcher, exec, $applauncher"
-      "$mainMod, F, Toggles current window fullscreen mode, fullscreen"
-      "$mainMod, Y, Pin current window (shows on all workspaces), pin"
-      ", Print, Creates a screenshot of an area, exec, $shot-region," 
-      "ALT, Print, Creates a screenshot of the active display, exec, $shot-screen,"
-      "$mainMod, K, Toggles  current window group mode (ungroup all related), togglegroup,"
-      "$mainMod, Tab, Switches to the next window in the group, changegroupactive, f"
-      "$mainMod, L, Lock the screen, exec, hyprlock"
-      
-      "$mainMod, mouse:272, Move the window towards a direction, movewindow"
-      "$mainMod SHIFT, left, Move active window to the left, movewindow, l"
-      "$mainMod SHIFT, right, Move active window to the right, movewindow, r"
-      "$mainMod SHIFT, up, Move active window upwards, movewindow, u"
-      "$mainMod SHIFT, down, Move active window downwards, movewindow, d"
-      "$mainMod, left, Move focus to the left, movefocus, l"
-      "$mainMod, right,  Move focus to the right, movefocus, r"
-      "$mainMod, up, Move focus upwards, movefocus, u"
-      "$mainMod, down, Move focus downwards, movefocus, d"
-
-      "$mainMod CTRL SHIFT, right, Resize to the right, resizeactive, 15 0"
-      "$mainMod CTRL SHIFT, left, Resize to the left, resizeactive, -15 0"
-      "$mainMod CTRL SHIFT, up, Resize upwards, resizeactive, 0 -15"
-      "$mainMod CTRL SHIFT, down, Resize downwards, resizeactive, 0 15"
-      "$mainMod CTRL SHIFT, l, Resize to the right, resizeactive, 15 0"
-      "$mainMod CTRL SHIFT, h, Resize to the left, resizeactive, -15 0"
-      "$mainMod CTRL SHIFT, k, Resize upwards, resizeactive, 0 -15"
-      "$mainMod CTRL SHIFT, j, Resize downwards, resizeactive, 0 15"
-
-      "$mainMod CTRL, 1, Move window and switch to workspace 1, movetoworkspace, 1"
-      "$mainMod CTRL, 2, Move window and switch to workspace 2, movetoworkspace, 2"
-      "$mainMod CTRL, 3, Move window and switch to workspace 3, movetoworkspace, 3"
-      "$mainMod CTRL, 4, Move window and switch to workspace 4, movetoworkspace, 4"
-      "$mainMod CTRL, 5, Move window and switch to workspace 5, movetoworkspace, 5"
-      "$mainMod CTRL, 6, Move window and switch to workspace 6, movetoworkspace, 6"
-      "$mainMod CTRL, 7, Move window and switch to workspace 7, movetoworkspace, 7"
-      "$mainMod CTRL, 8, Move window and switch to workspace 8, movetoworkspace, 8"
-      "$mainMod CTRL, 9, Move window and switch to workspace 9, movetoworkspace, 9"
-      "$mainMod CTRL, 0, Move window and switch to workspace 10, movetoworkspace, 10"
-      "$mainMod SHIFT, 1, Move window silently to workspace 1, movetoworkspacesilent, 1"
-      "$mainMod SHIFT, 2, Move window silently to workspace 2, movetoworkspacesilent, 2"
-      "$mainMod SHIFT, 3, Move window silently to workspace 3, movetoworkspacesilent, 3"
-      "$mainMod SHIFT, 4, Move window silently to workspace 4, movetoworkspacesilent, 4"
-      "$mainMod SHIFT, 5, Move window silently to workspace 5, movetoworkspacesilent, 5"
-      "$mainMod SHIFT, 6, Move window silently to workspace 6, movetoworkspacesilent, 6"
-      "$mainMod SHIFT, 7, Move window silently to workspace 7, movetoworkspacesilent, 7"
-      "$mainMod SHIFT, 8, Move window silently to workspace 8, movetoworkspacesilent, 8"
-      "$mainMod SHIFT, 9, Move window silently to workspace 9, movetoworkspacesilent, 9"
-      "$mainMod SHIFT, 0, Move window silently to workspace 10, movetoworkspacesilent, 10"
-
-      "$mainMod, 1, Switch to workspace 1, workspace, 1"
-      "$mainMod, 2, Switch to workspace 2, workspace, 2"
-      "$mainMod, 3, Switch to workspace 3, workspace, 3"
-      "$mainMod, 4, Switch to workspace 4, workspace, 4"
-      "$mainMod, 5, Switch to workspace 5, workspace, 5"
-      "$mainMod, 6, Switch to workspace 6, workspace, 6"
-      "$mainMod, 7, Switch to workspace 7, workspace, 7"
-      "$mainMod, 8, Switch to workspace 8, workspace, 8"
-      "$mainMod, 9, Switch to workspace 9, workspace, 9"
-      "$mainMod, 0, Switch to workspace 10, workspace, 10"
-    ];
 
     bind =
     [
-      "$mainMod, V, exec, cliphist list | fuzzel --dmenu --with-nth 2 | cliphist decode | wl-copy"
-      "$mainMod SHIFT, F12, exec, ~/.local/share/scripts/hypr-monitor-menu.sh"
-    ];
+      (mk ''mainMod .. " + RETURN"''         ''hl.dsp.exec_cmd(terminal)'')
+      (mk ''mainMod .. " + E"''              ''hl.dsp.exec_cmd(filemanager)'')
+      (mk ''mainMod .. " + Q"''              ''hl.dsp.window.close()'')
+      (mk ''mainMod .. " + SHIFT + M"''      ''hl.dsp.exec_cmd([[loginctl terminate-user ""]])'')
+      (mk ''mainMod .. " + B"''              ''hl.dsp.window.float({ action = "toggle" })'')
+      (mk ''mainMod .. " + SPACE"''          ''hl.dsp.exec_cmd(applauncher)'')
+      (mk ''mainMod .. " + F"''              ''hl.dsp.window.fullscreen()'')
+      (mk ''mainMod .. " + Y"''              ''hl.dsp.window.pin()'')
+      (mk ''"Print"''                        ''hl.dsp.exec_cmd(shot_region)'')
+      (mk ''"ALT + Print"''                  ''hl.dsp.exec_cmd(shot_screen)'')
+      (mk ''mainMod .. " + K"''              ''hl.dsp.window.group({ action = "toggle" })'')
+      (mk ''mainMod .. " + Tab"''            ''hl.dsp.window.group({ action = "change_active", direction = "f" })'')
+      (mk ''mainMod .. " + L"''              ''hl.dsp.exec_cmd("hyprlock")'')
 
-    bindm =
-    [
-      "$mainMod, mouse:273, resizewindow"
-      "$mainMod, mouse:272, movewindow"
-    ];
+      (mk ''mainMod .. " + SHIFT + left"''   ''hl.dsp.window.move({ direction = "l" })'')
+      (mk ''mainMod .. " + SHIFT + right"''  ''hl.dsp.window.move({ direction = "r" })'')
+      (mk ''mainMod .. " + SHIFT + up"''     ''hl.dsp.window.move({ direction = "u" })'')
+      (mk ''mainMod .. " + SHIFT + down"''   ''hl.dsp.window.move({ direction = "d" })'')
 
-    bindel =
-    [
-      '', XF86AudioRaiseVolume, exec, pamixer -i 5 && pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock''
-      '', XF86AudioLowerVolume, exec, pamixer -d 5 && pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock''
-      '', XF86AudioMute, exec, pamixer -t && { pamixer --get-mute | grep -q true && echo "0 muted" || pamixer --get-volume; } > $XDG_RUNTIME_DIR/wob.sock''
-    ];
+      (mk ''mainMod .. " + left"''           ''hl.dsp.window.focus({ direction = "l" })'')
+      (mk ''mainMod .. " + right"''          ''hl.dsp.window.focus({ direction = "r" })'')
+      (mk ''mainMod .. " + up"''             ''hl.dsp.window.focus({ direction = "u" })'')
+      (mk ''mainMod .. " + down"''           ''hl.dsp.window.focus({ direction = "d" })'')
+
+      (mk ''mainMod .. " + CTRL + SHIFT + right"''  ''hl.dsp.window.resize({ x = 15,  y = 0,   relative = true })'')
+      (mk ''mainMod .. " + CTRL + SHIFT + left"''   ''hl.dsp.window.resize({ x = -15, y = 0,   relative = true })'')
+      (mk ''mainMod .. " + CTRL + SHIFT + up"''     ''hl.dsp.window.resize({ x = 0,   y = -15, relative = true })'')
+      (mk ''mainMod .. " + CTRL + SHIFT + down"''   ''hl.dsp.window.resize({ x = 0,   y = 15,  relative = true })'')
+      (mk ''mainMod .. " + CTRL + SHIFT + l"''      ''hl.dsp.window.resize({ x = 15,  y = 0,   relative = true })'')
+      (mk ''mainMod .. " + CTRL + SHIFT + h"''      ''hl.dsp.window.resize({ x = -15, y = 0,   relative = true })'')
+      (mk ''mainMod .. " + CTRL + SHIFT + k"''      ''hl.dsp.window.resize({ x = 0,   y = -15, relative = true })'')
+      (mk ''mainMod .. " + CTRL + SHIFT + j"''      ''hl.dsp.window.resize({ x = 0,   y = 15,  relative = true })'')
+
+      (mk ''mainMod .. " + V"'' ''hl.dsp.exec_cmd([[cliphist list | fuzzel --dmenu --with-nth 2 | cliphist decode | wl-copy]])'')
+      (mk ''mainMod .. " + SHIFT + F12"'' ''hl.dsp.exec_cmd("~/.local/share/scripts/hypr-monitor-menu.sh")'')
+
+      (mkOpt ''mainMod .. " + mouse:273"'' ''hl.dsp.window.resize()'' { mouse = true; })
+      (mkOpt ''mainMod .. " + mouse:272"'' ''hl.dsp.window.move()''   { mouse = true; })
+
+      (mkOpt ''"XF86AudioRaiseVolume"''
+             ''hl.dsp.exec_cmd([[pamixer -i 5 && pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock]])''
+             { locked = true; repeating = true; })
+      (mkOpt ''"XF86AudioLowerVolume"''
+             ''hl.dsp.exec_cmd([[pamixer -d 5 && pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock]])''
+             { locked = true; repeating = true; })
+      (mkOpt ''"XF86AudioMute"''
+             ''hl.dsp.exec_cmd([[pamixer -t && { pamixer --get-mute | grep -q true && echo "0 muted" || pamixer --get-volume; } > $XDG_RUNTIME_DIR/wob.sock]])''
+             { locked = true; repeating = true; })
+    ]
+    ++ builtins.concatLists (builtins.genList (i:
+      let
+        ws  = i + 1;
+        key = if ws == 10 then "0" else toString ws;
+      in
+      [
+        (mk ''mainMod .. " + ${key}"''         ''hl.dsp.workspace(${toString ws})'')
+        (mk ''mainMod .. " + CTRL + ${key}"''  ''hl.dsp.window.move_to_workspace(${toString ws})'')
+        (mk ''mainMod .. " + SHIFT + ${key}"'' ''hl.dsp.window.move_to_workspace(${toString ws}, { silent = true })'')
+      ]
+    ) 10);
   };
 }

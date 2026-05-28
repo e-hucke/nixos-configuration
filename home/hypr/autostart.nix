@@ -1,14 +1,19 @@
-{ ... }:
+{ lib, ... }:
 
 {
-  wayland.windowManager.hyprland.settings =
+  wayland.windowManager.hyprland.settings.on =
   {
-    exec-once =
+    _args =
     [
-      "uwsm app -- waybar"
-      "uwsm app -- nm-applet --indicator"
-      "uwsm app -- wl-paste --type text --watch cliphist store"
-      "uwsm app -- wl-paste --type image --watch cliphist store"
+      "hyprland.start"
+      (lib.generators.mkLuaInline ''
+        function()
+          hl.exec_cmd("uwsm app -- waybar")
+          hl.exec_cmd("uwsm app -- nm-applet --indicator")
+          hl.exec_cmd("uwsm app -- wl-paste --type text --watch cliphist store")
+          hl.exec_cmd("uwsm app -- wl-paste --type image --watch cliphist store")
+        end
+      '')
     ];
   };
 }

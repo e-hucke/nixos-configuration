@@ -3,17 +3,17 @@
 {
   wayland.windowManager.hyprland.settings.env =
   [
-    "ELECTRON_OZONE_PLATFORM_HINT,auto"
-    "NIXOS_OZONE_WL,1"
-    "QT_CURSOR_SIZE,24"
-    "XCURSOR_THEME,BreezeX-RosePineDawn-Linux"
-    "XCURSOR_SIZE,24"
-    "HYPRCURSOR_THEME,BreezeX-RosePineDawn-Linux"
-    "HYPRCURSOR_SIZE,24"
-    "LIBVA_DRIVER_NAME,nvidia"
-    "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-    "__GL_GSYNC_ALLOWED,1"
-    "__GL_VRR_ALLOWED,1"
+    { _args = [ "ELECTRON_OZONE_PLATFORM_HINT" "auto" ]; }
+    { _args = [ "NIXOS_OZONE_WL" "1" ]; }
+    { _args = [ "QT_CURSOR_SIZE" "24" ]; }
+    { _args = [ "XCURSOR_THEME" "BreezeX-RosePineDawn-Linux" ]; }
+    { _args = [ "XCURSOR_SIZE" "24" ]; }
+    { _args = [ "HYPRCURSOR_THEME" "BreezeX-RosePineDawn-Linux" ]; }
+    { _args = [ "HYPRCURSOR_SIZE" "24" ]; }
+    { _args = [ "LIBVA_DRIVER_NAME" "nvidia" ]; }
+    { _args = [ "__GLX_VENDOR_LIBRARY_NAME" "nvidia" ]; }
+    { _args = [ "__GL_GSYNC_ALLOWED" "1" ]; }
+    { _args = [ "__GL_VRR_ALLOWED" "1" ]; }
   ];
 
   xdg.configFile."uwsm/env-hyprland".text =

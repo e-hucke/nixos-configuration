@@ -3,23 +3,23 @@
 {
   wayland.windowManager.hyprland.settings =
   {
-    "$accent" = "rgba(de99c7ff)";
-    "$accentLight" = "rgba(e8b0d4ff)";
-    "$accentDark" = "rgba(c97082ff)";
-    "$bgLight" = "rgba(f9f4f7ff)";
-    "$bgHover" = "rgba(f0d4e4ff)";
-    "$bgDark" = "rgba(5c5462ff)";
-    "$textPrimary" = "rgba(5c5462ff)";
-    "$textMuted" = "rgba(6b5f70ff)";
-    "$textLight" = "rgba(ffffffff)";
-    "$success" = "rgba(5a9a6eff)";
-    "$warning" = "rgba(b8860bff)";
-    "$error" = "rgba(d64f4fff)";
-    "$info" = "rgba(7b68a6ff)";
-    "$purple" = "rgba(7b68a6ff)";
-    "$mauve" = "rgba(b07aa0ff)";
-    "$lavender" = "rgba(8e7aa3ff)";
-    "$rose" = "rgba(c97082ff)";
-    "$gold" = "rgba(b8860bff)";
+    accent       = { _var = "rgba(de99c7ff)"; };
+    accentLight  = { _var = "rgba(e8b0d4ff)"; };
+    accentDark   = { _var = "rgba(c97082ff)"; };
+    bgLight      = { _var = "rgba(f9f4f7ff)"; };
+    bgHover      = { _var = "rgba(f0d4e4ff)"; };
+    bgDark       = { _var = "rgba(5c5462ff)"; };
+    textPrimary  = { _var = "rgba(5c5462ff)"; };
+    textMuted    = { _var = "rgba(6b5f70ff)"; };
+    textLight    = { _var = "rgba(ffffffff)"; };
+    success      = { _var = "rgba(5a9a6eff)"; };
+    warning      = { _var = "rgba(b8860bff)"; };
+    error        = { _var = "rgba(d64f4fff)"; };
+    info         = { _var = "rgba(7b68a6ff)"; };
+    purple       = { _var = "rgba(7b68a6ff)"; };
+    mauve        = { _var = "rgba(b07aa0ff)"; };
+    lavender     = { _var = "rgba(8e7aa3ff)"; };
+    rose         = { _var = "rgba(c97082ff)"; };
+    gold         = { _var = "rgba(b8860bff)"; };
   };
 }
