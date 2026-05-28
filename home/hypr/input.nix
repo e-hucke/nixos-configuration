@@ -33,10 +33,7 @@ in
         accel_profile = "flat";
       };
 
-      misc =
-      {
-        middle_click_paste = false;
-      };
+      misc.middle_click_paste = false;
 
       binds =
       {
@@ -60,8 +57,8 @@ in
       (mk ''mainMod .. " + Y"''              ''hl.dsp.window.pin()'')
       (mk ''"Print"''                        ''hl.dsp.exec_cmd(shot_region)'')
       (mk ''"ALT + Print"''                  ''hl.dsp.exec_cmd(shot_screen)'')
-      (mk ''mainMod .. " + K"''              ''hl.dsp.window.group({ action = "toggle" })'')
-      (mk ''mainMod .. " + Tab"''            ''hl.dsp.window.group({ action = "change_active", direction = "f" })'')
+      (mk ''mainMod .. " + K"''              ''hl.dsp.group.toggle()'')
+      (mk ''mainMod .. " + Tab"''            ''hl.dsp.group.next()'')
       (mk ''mainMod .. " + L"''              ''hl.dsp.exec_cmd("hyprlock")'')
 
       (mk ''mainMod .. " + SHIFT + left"''   ''hl.dsp.window.move({ direction = "l" })'')
@@ -69,10 +66,10 @@ in
       (mk ''mainMod .. " + SHIFT + up"''     ''hl.dsp.window.move({ direction = "u" })'')
       (mk ''mainMod .. " + SHIFT + down"''   ''hl.dsp.window.move({ direction = "d" })'')
 
-      (mk ''mainMod .. " + left"''           ''hl.dsp.window.focus({ direction = "l" })'')
-      (mk ''mainMod .. " + right"''          ''hl.dsp.window.focus({ direction = "r" })'')
-      (mk ''mainMod .. " + up"''             ''hl.dsp.window.focus({ direction = "u" })'')
-      (mk ''mainMod .. " + down"''           ''hl.dsp.window.focus({ direction = "d" })'')
+      (mk ''mainMod .. " + left"''           ''hl.dsp.focus({ direction = "l" })'')
+      (mk ''mainMod .. " + right"''          ''hl.dsp.focus({ direction = "r" })'')
+      (mk ''mainMod .. " + up"''             ''hl.dsp.focus({ direction = "u" })'')
+      (mk ''mainMod .. " + down"''           ''hl.dsp.focus({ direction = "d" })'')
 
       (mk ''mainMod .. " + CTRL + SHIFT + right"''  ''hl.dsp.window.resize({ x = 15,  y = 0,   relative = true })'')
       (mk ''mainMod .. " + CTRL + SHIFT + left"''   ''hl.dsp.window.resize({ x = -15, y = 0,   relative = true })'')
@@ -86,8 +83,8 @@ in
       (mk ''mainMod .. " + V"'' ''hl.dsp.exec_cmd([[cliphist list | fuzzel --dmenu --with-nth 2 | cliphist decode | wl-copy]])'')
       (mk ''mainMod .. " + SHIFT + F12"'' ''hl.dsp.exec_cmd("~/.local/share/scripts/hypr-monitor-menu.sh")'')
 
-      (mkOpt ''mainMod .. " + mouse:273"'' ''hl.dsp.window.resize()'' { mouse = true; })
-      (mkOpt ''mainMod .. " + mouse:272"'' ''hl.dsp.window.move()''   { mouse = true; })
+      (mk ''mainMod .. " + mouse:273"'' ''hl.dsp.window.resize()'')
+      (mk ''mainMod .. " + mouse:272"'' ''hl.dsp.window.drag()'')
 
       (mkOpt ''"XF86AudioRaiseVolume"''
              ''hl.dsp.exec_cmd([[pamixer -i 5 && pamixer --get-volume > $XDG_RUNTIME_DIR/wob.sock]])''
@@ -105,9 +102,9 @@ in
         key = if ws == 10 then "0" else toString ws;
       in
       [
-        (mk ''mainMod .. " + ${key}"''         ''hl.dsp.workspace(${toString ws})'')
-        (mk ''mainMod .. " + CTRL + ${key}"''  ''hl.dsp.window.move_to_workspace(${toString ws})'')
-        (mk ''mainMod .. " + SHIFT + ${key}"'' ''hl.dsp.window.move_to_workspace(${toString ws}, { silent = true })'')
+        (mk ''mainMod .. " + ${key}"''         ''hl.dsp.focus({workspace = ${toString ws}})'')
+        (mk ''mainMod .. " + CTRL + ${key}"''  ''hl.dsp.window.move({workspace = ${toString ws}})'')
+        (mk ''mainMod .. " + SHIFT + ${key}"'' ''hl.dsp.window.move({workspace = ${toString ws}, { follow = true }})'')
       ]
     ) 10);
   };

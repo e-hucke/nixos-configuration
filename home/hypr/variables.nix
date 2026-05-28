@@ -7,14 +7,11 @@
     {
       gaps_in = 3;
       gaps_out = 5;
-      border_size = 2;
+      border_size = 1;
       "col.active_border" = lib.generators.mkLuaInline "accent";
       "col.inactive_border" = lib.generators.mkLuaInline "bgHover";
       layout = "dwindle";
-      snap =
-      {
-        enabled = true;
-      };
+      snap.enabled = true;
     };
 
     group =
@@ -47,16 +44,6 @@
       focus_on_activate = true;
     };
 
-    render =
-    {
-      direct_scanout = false;
-    };
-
-    dwindle =
-    {
-      special_scale_factor = 0.8;
-      pseudotile = true;
-      preserve_split = true;
-    };
+    render.direct_scanout = false;
   };
 }
