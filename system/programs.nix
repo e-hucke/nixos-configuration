@@ -25,6 +25,7 @@
   {
     enable = true;
     extraCompatPackages = [ pkgs.proton-ge-bin ];
+    protontricks.enable = true;
   };
 
   programs.neovim =

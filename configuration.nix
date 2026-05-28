@@ -63,6 +63,9 @@ in
     networkmanagerapplet
     rose-pine-cursor
     pulseaudio
+    rar
+    unar
+    wine
   ];
   
   fonts.packages = with pkgs; 

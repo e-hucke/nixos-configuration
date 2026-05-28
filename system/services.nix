@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   services.gvfs.enable = true;
@@ -18,4 +18,9 @@
     ];
   };
   security.pam.services.hyprlock = {};
+  services.mullvad-vpn =
+  {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 }
