@@ -81,11 +81,11 @@
     #cpu,
     #memory,
     #wireplumber,
-    #idle_inhibitor
+    #idle_inhibitor,
     #custom-gpu,
     #custom-power {
         background-color: transparent;
-        padding: 4px 12px;
+        padding: 3px 12px;
         color: #d4cdd1;
         border-left: 1px solid #3d363b;
     }
@@ -120,7 +120,7 @@
     #custom-power {
         color: #de99c7;
         padding: 4px 14px;
-        margin-right: 4px;
+        margin-right: 3px;
         border-left: 1px solid #3d363b;
     }
 

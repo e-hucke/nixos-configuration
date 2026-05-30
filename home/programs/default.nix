@@ -10,12 +10,12 @@
     ./cliphist.nix
     ./wlogout.nix
     ./fastfetch.nix
-    ./vscode.nix
+    ./vscodium.nix
     ./thunar.nix
+    ./firefox.nix
   ];
 
   programs.vesktop.enable = true;
-  programs.firefox.enable = true;
   programs.lutris.enable = true;
   programs.mangohud =
   {

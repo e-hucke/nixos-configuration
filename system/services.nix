@@ -2,6 +2,7 @@
 
 {
   services.gvfs.enable = true;
+  services.getty.helpLine = "";
   services.pipewire =
   {
     enable = true;

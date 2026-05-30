@@ -1,10 +1,9 @@
 { pkgs, ... }:
 
 {
-  programs.vscode =
+  programs.vscodium =
   {
     enable = true;
-    package = pkgs.vscodium;
     profiles.default =
     {
       extensions = with pkgs.vscode-extensions;
@@ -29,6 +28,6 @@
   home.packages = with pkgs;
   [
     nixd
-    nixfmt-rfc-style
+    nixfmt
   ];
 }

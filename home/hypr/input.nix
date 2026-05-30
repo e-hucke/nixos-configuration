@@ -104,7 +104,7 @@ in
       [
         (mk ''mainMod .. " + ${key}"''         ''hl.dsp.focus({workspace = ${toString ws}})'')
         (mk ''mainMod .. " + CTRL + ${key}"''  ''hl.dsp.window.move({workspace = ${toString ws}})'')
-        (mk ''mainMod .. " + SHIFT + ${key}"'' ''hl.dsp.window.move({workspace = ${toString ws}, { follow = true }})'')
+        (mk ''mainMod .. " + SHIFT + ${key}"'' ''hl.dsp.window.move({workspace = ${toString ws}, follow = false })'')
       ]
     ) 10);
   };
