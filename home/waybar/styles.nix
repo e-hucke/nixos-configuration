@@ -81,6 +81,7 @@
     #cpu,
     #memory,
     #wireplumber,
+    #idle_inhibitor
     #custom-gpu,
     #custom-power {
         background-color: transparent;
@@ -110,6 +111,10 @@
 
     #wireplumber {
         color: #a5c789;
+    }
+
+    #idle_inhibitor {
+        color: #efb2db;
     }
 
     #custom-power {

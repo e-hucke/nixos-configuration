@@ -8,7 +8,7 @@
     {
       layer = "top";
       position = "top";
-      height = 28;
+      height = 22;
       margin-left = 0;
       margin-bottom = 0;
       margin-right = 0;
@@ -29,13 +29,24 @@
         "cpu"
         "custom/gpu"
         "wireplumber"
+        "idle_inhibitor"
         "tray"
         "custom/power"      
       ];
 
+      "idle_inhibitor" =
+      {
+        format = "{icon}";
+        "format-icons" =
+        {
+          activated = "";
+          deactivated = "";
+        };
+      };
+
       memory =
       {
-        interval = 30;
+        interval = 15;
         format = " {used:0.2f}/{total:0.0f}GB";
         on-click = "kitty -e btop";
       };
@@ -56,7 +67,7 @@
     
       cpu =
       {
-        interval = 1;
+        interval = 5;
         format = "{max_frequency}GHz<span color=\"darkgray\">|{usage}%</span>";
         max-length = 11;
         min-length = 11;
