@@ -1,18 +1,14 @@
-{ config, pkgs, lib, ... }:
-
-let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-in
+{ config, pkgs, lib, inputs, ... }:
 
 {
-  imports = 
-  [ 
+  imports =
+  [
     ./hardware-configuration.nix
-    (import "${home-manager}/nixos")
     ./system
   ];
 
-  
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   boot = 
   {
     loader.systemd-boot.enable = true;
@@ -32,7 +28,7 @@ in
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
   services.xserver.xkb.layout = "us";
-
+  hardware.i2c.enable = true;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -42,7 +38,7 @@ in
   {
     isNormalUser = true;
     description = "e";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
 
@@ -50,6 +46,7 @@ in
   {
     useUserPackages = true;
     useGlobalPkgs = true;
+    extraSpecialArgs = { inherit inputs; };
     users.e = import ./home;
   };
 
@@ -66,6 +63,21 @@ in
     rar
     unar
     wine
+    kdePackages.dolphin
+    kdePackages.qtsvg
+    kdePackages.ffmpegthumbs
+    kdePackages.kdegraphics-thumbnailers
+    kdePackages.qtimageformats
+    kdePackages.kimageformats
+    kdePackages.kio-admin
+    kdePackages.kompare
+    taglib
+    icoutils
+    gpu-screen-recorder-gtk
+    ddcutil
+    nwg-look
+    adw-gtk3
+    qt6Packages.qt6ct
   ];
   
   fonts.packages = with pkgs; 
@@ -80,7 +92,6 @@ in
   {
     "SUDO_EDITOR" = "nvim";
   };
-
 
   system.stateVersion = "25.11";
 }

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   wayland.windowManager.hyprland =
@@ -7,15 +7,15 @@
     package = null;
     systemd.enable = false;
     configType = "lua";
+    plugins = [ pkgs.hyprlandPlugins.hypr-dynamic-cursors ];
   };
   imports =
   [
-    ./colors.nix
     ./variables.nix
     ./input.nix
     ./autostart.nix
     ./monitor.nix
-    ./windows.nix
+    ./rules.nix
     ./env.nix
   ];
 }

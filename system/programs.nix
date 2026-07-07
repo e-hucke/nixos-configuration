@@ -24,7 +24,8 @@
   };
 
   programs.gamemode.enable = true;
-  programs.thunar.enable = true;
+  programs.gpu-screen-recorder.enable = true;
+  environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
 
   programs.steam = 
   {

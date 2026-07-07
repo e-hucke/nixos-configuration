@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   hardware.graphics.enable = true;
@@ -12,5 +12,14 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
+  boot.kernelParams =
+  [
+    "nvidia-drm.fbdev=1"
+    "video=DP-3:d"
+  ];
+
+  services.udev.extraRules =
+  ''
+    SUBSYSTEM=="drm", KERNEL=="card1-DP-3", RUN +="${pkgs.coreutils}/bin/chmod 666 /sys/class/drm/card1-DP-3/status"
+  '';
 }

@@ -14,6 +14,7 @@
     { _args = [ "__GLX_VENDOR_LIBRARY_NAME" "nvidia" ]; }
     { _args = [ "__GL_GSYNC_ALLOWED" "1" ]; }
     { _args = [ "__GL_VRR_ALLOWED" "1" ]; }
+    { _args = [ " QT_QPA_PLATFORMTHEME" "qt6ct" ]; }
   ];
 
   xdg.configFile."uwsm/env-hyprland".text =
@@ -30,5 +31,6 @@
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
     export __GL_GSYNC_ALLOWED=1
     export __GL_VRR_ALLOWED=1
+    export QT_QPA_PLATFORMTHEME=qt6ct
   '';
 }

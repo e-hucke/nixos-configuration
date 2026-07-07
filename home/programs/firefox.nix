@@ -11,6 +11,7 @@
       settings =
       {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "browser.tabs.closeWindowWithLastTab" = false;
       };
       userChrome =
       ''

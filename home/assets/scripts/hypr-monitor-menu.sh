@@ -17,7 +17,12 @@ action=$(printf "Auto (left of others)\nMirror\nDisable" \
 
 case "$action" in
   "Auto (left of others)")
-    hyprctl keyword monitor "$monitor, preferred, auto-left, 1"
+    hyprctl dispatch "hl.monitor({
+      output = \"$monitor\",
+      mode = \"preferred\",
+      position = \"auto-left\",
+      scale = 1,
+    })"
     ;;
   Mirror)
     sources=$(echo "$monitors_json" \
@@ -25,9 +30,19 @@ case "$action" in
     src=$(echo "$sources" | fuzzel --dmenu --prompt "Mirror source > ")
     [ -z "$src" ] && exit 0
     src_name=$(echo "$src" | awk '{print $1}')
-    hyprctl keyword monitor "$monitor, preferred, auto, 1, mirror, $src_name"
+
+    hyprctl dispatch "hl.monitor({
+      output = \"$monitor\",
+      mode = \"preferred\",
+      position = \"auto\",
+      scale = 1,
+      mirror = \"$src_name\",
+    })"
     ;;
   Disable)
-    hyprctl keyword monitor "$monitor, disable"
+    hyprctl dispatch "hl.monitor({
+      output = \"$monitor\",
+      disabled = true,
+    })"
     ;;
 esac

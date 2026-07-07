@@ -1,12 +1,11 @@
-{ pkgs, ...}:
+{ inputs, pkgs, ...}:
 
 {
   imports =
   [
-    ./services.nix
     ./programs
     ./hypr
-    ./waybar
+    inputs.noctalia.homeModules.default
   ];
 
   home.packages = with pkgs;
@@ -17,6 +16,7 @@
     git
     pavucontrol
     grim
+    slurp
     papirus-icon-theme
     protonup-qt
     kdePackages.ark
@@ -29,10 +29,12 @@
     mpv
     jq
     pamixer
+    obs-studio
   ];
 
   home.pointerCursor =
   {
+    enable = true;
     package = pkgs.rose-pine-cursor;
     name = "BreezeX-RosePineDawn-Linux";
     size = 24;
