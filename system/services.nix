@@ -16,7 +16,6 @@
       }
     ];
   };
-  security.pam.services.hyprlock = {};
   services.mullvad-vpn =
   { 
     enable = true;

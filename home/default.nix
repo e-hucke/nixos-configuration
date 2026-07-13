@@ -4,8 +4,8 @@
   imports =
   [
     ./programs
-    ./hypr
     inputs.noctalia.homeModules.default
+    inputs.niri.homeModules.niri
   ];
 
   home.packages = with pkgs;
@@ -41,6 +41,14 @@
     gtk.enable = true;
     x11.enable = true;
     hyprcursor.enable = true;
+  };
+
+  programs.niri.config = builtins.readFile ./niri.kdl;
+
+  home.file.".local/share/scripts/niri-monitor-menu.sh" =
+  {
+    source = ./assets/scripts/niri-monitor-menu.sh;
+    executable = true;
   };
 
   home.stateVersion = "25.11";

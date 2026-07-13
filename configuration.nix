@@ -7,6 +7,13 @@
     ./system
   ];
 
+  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+  programs.niri =
+  {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot = 
@@ -78,6 +85,8 @@
     nwg-look
     adw-gtk3
     qt6Packages.qt6ct
+    xwayland-satellite
+    nvtopPackages.nvidia
   ];
   
   fonts.packages = with pkgs; 
@@ -91,6 +100,22 @@
   environment.variables =
   {
     "SUDO_EDITOR" = "nvim";
+  };
+
+
+  environment.sessionVariables =
+  {
+    NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    QT_QPA_PLATFORMTHEME = "qt6ct";
+    QT_CURSOR_SIZE = "24";
+    XCURSOR_THEME = "BreezeX-RosePineDawn-Linux";
+    XCURSOR_SIZE = "24";
+    LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    __GL_GSYNC_ALLOWED = "1";
+    __GL_VRR_ALLOWED = "1";
   };
 
   system.stateVersion = "25.11";

@@ -1,25 +1,15 @@
 { pkgs, ... }:
 
 {
-  programs.uwsm.enable = true;
-
-  programs.hyprland =
-  {
-    enable = true;
-    xwayland.enable = true;
-    withUWSM = true;
-  };
-
   xdg.portal =
   {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-    configPackages = with pkgs; [ xdg-desktop-portal-hyprland xdg-desktop-portal-gtk ];
-    
+    extraPortals = with pkgs; [ xdg-desktop-portal-gnome xdg-desktop-portal-gtk kdePackages.xdg-desktop-portal-kde ];
+
     config =
     {
-      common.default = [ "hyprland" "gtk" ];
-      hyprland.default = [ "hyprland" "gtk" ];
+      common.default = [ "gnome" "gtk" ];
+      niri."org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
     };
   };
 
