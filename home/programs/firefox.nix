@@ -12,6 +12,9 @@
       {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "browser.tabs.closeWindowWithLastTab" = false;
+        "widget.non-native-theme.gtk.scrollbar.thumb-size" = 1;
+        "widget.non-native-theme.scrollbar.style" = 4;
+        "widget.non-native-theme.scrollbar.size.override" = 10;
       };
       userChrome =
       ''

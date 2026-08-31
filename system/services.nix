@@ -19,7 +19,8 @@
   services.mullvad-vpn =
   { 
     enable = true;
-    package = pkgs.mullvad-vpn;
+    gui.enable = true;
+    
   };
   virtualisation.docker =
   {

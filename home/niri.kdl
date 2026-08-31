@@ -2,6 +2,8 @@ spawn-sh-at-startup "bash -c 'echo detect > /sys/class/drm/card1-DP-3/status'"
 spawn-sh-at-startup "env LD_LIBRARY_PATH=/run/opengl-driver/lib noctalia"
 spawn-at-startup "nm-applet" "--indicator"
 
+include optional=true "noctalia.kdl"
+
 input {
     keyboard {
         xkb {
@@ -28,6 +30,9 @@ output "Invalid Vendor Codename - RTK ANMITE 0x19201200" {
     position x=2560 y=-240
     scale 1
     transform "270"
+    layout {
+        default-column-width { proportion 1.0; }
+    }
 }
 
 output "Sichuang Changhong Corporation Smart TV 0x00000001" {
@@ -167,6 +172,11 @@ window-rule {
     match title="^(Save File|Open File)$"
     match title="^(Steam - Self Updater)$"
     open-floating true
+}
+
+window-rule {
+    match app-id="kitty"
+    opacity 0.9
 }
 
 window-rule {

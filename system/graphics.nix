@@ -11,6 +11,7 @@
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
+  boot.blacklistedKernelModules = [ "amdgpu" ];    
 
   boot.kernelParams =
   [
