@@ -10,6 +10,7 @@
   home.packages = with pkgs;
   [
     bolt-launcher
+    jackify
     deluge
     wl-clipboard
     git

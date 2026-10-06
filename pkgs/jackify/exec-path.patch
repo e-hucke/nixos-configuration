@@ -1,0 +1,47 @@
+--- a/jackify/backend/services/nxm_protocol.py	2026-10-06 08:22:13.921529884 +0200
++++ b/jackify/backend/services/nxm_protocol.py	2026-10-06 08:22:13.942470616 +0200
+@@ -71,7 +71,9 @@
+             "APPIMAGE" in env or "APPDIR" in env or
+             (sys.argv[0] and sys.argv[0].endswith(".AppImage"))
+         )
+-        if is_appimage:
++        if env.get("JACKIFY_EXEC_PATH"):
++            exec_line = f'Exec="{env["JACKIFY_EXEC_PATH"]}" %u'
++        elif is_appimage:
+             exec_path = env.get("APPIMAGE") or str(Path(sys.argv[0]).resolve())
+             exec_line = f'Exec="{exec_path}" %u'
+         else:
+--- a/jackify/backend/services/nexus_oauth_protocol.py	2026-10-06 08:22:13.923529848 +0200
++++ b/jackify/backend/services/nexus_oauth_protocol.py	2026-10-06 08:22:13.960461550 +0200
+@@ -27,7 +27,11 @@
+                 (sys.argv[0] and sys.argv[0].endswith('.AppImage'))
+             )
+             exec_path_reliable = True
+-            if is_appimage:
++            nix_exec_path = env.get('JACKIFY_EXEC_PATH')
++            if nix_exec_path:
++                exec_path = nix_exec_path
++                logger.info("Using JACKIFY_EXEC_PATH env var: %s", exec_path)
++            elif is_appimage:
+                 if 'APPIMAGE' in env:
+                     exec_path = env['APPIMAGE']
+                     logger.info("Using APPIMAGE env var: %s", exec_path)
+@@ -44,7 +48,8 @@
+                 logger.info("DEV mode exec path: %s", exec_path)
+                 logger.info("Source directory: %s", src_dir)
+ 
+-            expected_exec = f'Exec="{exec_path}" %u' if is_appimage else f'Exec={exec_path} %u'
++            use_quoted_exec = is_appimage or bool(nix_exec_path)
++            expected_exec = f'Exec="{exec_path}" %u' if use_quoted_exec else f'Exec={exec_path} %u'
+             needs_write = not desktop_file.exists()
+             if not needs_write and exec_path_reliable:
+                 current_content = desktop_file.read_text()
+@@ -55,7 +60,7 @@
+                 logger.warning("Could not reliably determine AppImage path, keeping existing desktop file")
+ 
+             desktop_file.parent.mkdir(parents=True, exist_ok=True)
+-            if needs_write and is_appimage:
++            if needs_write and use_quoted_exec:
+                 desktop_content = f"""[Desktop Entry]
+ Type=Application
+ Name=Jackify

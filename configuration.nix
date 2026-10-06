@@ -7,7 +7,13 @@
     ./system
   ];
 
-  nixpkgs.overlays = [ inputs.niri.overlays.niri (import ./overlays/beatoraja.nix) ];
+  nixpkgs.overlays =
+  [
+    inputs.niri.overlays.niri
+    (import ./overlays/beatoraja.nix)
+    (import ./overlays/jackify.nix)
+  ];
+  
   programs.niri =
   {
     enable = true;
