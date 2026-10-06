@@ -7,7 +7,7 @@
     ./system
   ];
 
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+  nixpkgs.overlays = [ inputs.niri.overlays.niri (import ./overlays/beatoraja.nix) ];
   programs.niri =
   {
     enable = true;
@@ -21,6 +21,9 @@
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
+    extraModprobeConfig = ''
+      options cfg80211 ieee80211_regdom=DE
+    '';
   };
   zramSwap.enable = true;
 
@@ -37,8 +40,14 @@
   services.xserver.xkb.layout = "us";
   hardware.i2c.enable = true;
 
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
+  networking =
+  {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    wireless.enable = true;
+  };
+  hardware.enableRedistributableFirmware = true;
+  hardware.wirelessRegulatoryDatabase = true;
 
 
   users.users.e = 
@@ -87,6 +96,9 @@
     qt6Packages.qt6ct
     xwayland-satellite
     nvtopPackages.nvidia
+    gdu
+    iw
+    usbutils
   ];
   
   fonts.packages = with pkgs; 

@@ -1,0 +1,15 @@
+--- a/holo-realtek-firmware-toggles
++++ b/holo-realtek-firmware-toggles
+@@ -230,6 +230,12 @@
+             # Usually something like "0-9", but empty means default
+             MCS_RATES="${2:-}"
+
++            # rtw89 crashes when the rate mask is set while the adapter is not associated
++            # and has no 2.4 GHz band (ValveSoftware/SteamVR-for-Linux#946)
++            if ! iw dev "${WLAN_NAME}" link | grep -q "^Connected to"; then
++                continue
++            fi
++
+             if [[ -z "${MCS_RATES}" ]]; then
+                 # Reset to default, ignore failure
+                 iw dev "${WLAN_NAME}" set bitrates 2>/dev/null || true

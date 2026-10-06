@@ -4,7 +4,6 @@
   imports =
   [
     ./programs
-    inputs.noctalia.homeModules.default
     inputs.niri.homeModules.niri
   ];
 
@@ -30,6 +29,13 @@
     jq
     pamixer
     obs-studio
+    (pkgs.lr2oraja-endlessdream.withPackages (ps: with ps; [
+      modernchic
+      minir
+      bokutachi-ir
+      groundbreaking
+      brook
+    ]))
   ];
 
   home.pointerCursor =
